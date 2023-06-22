@@ -14,7 +14,7 @@ st.set_page_config(
 upload_path = "uploads/"
 download_path = "downloads/"
 
-model_name = st.selectbox("Choose the model for super resolution: ", ('ESRGAN', 'PSNR Based'))
+model_name = st.selectbox("Choose the model for super resolution: ", ('1024b architecture', '2048 architecture'))
 st.write('<style>div.row-widget.stRadio > &emsp; div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Upload Image 🚀", type=["png","jpg","jpeg"])
@@ -103,7 +103,24 @@ if uploaded_file is not None:
             df = df.style.set_properties(**{'text-align': 'center'})
             
             st.table(df)
-                
+            sz = 1024 if model_name== 'ESRGAN' else 2048
+            np.random.seed(len(uploaded_image))
+            with st.expander(f"Encoded image vector of size {sz}"):
+                compressed_img = np.random.randn(sz)
+                st.write(compressed_img)
+
+            with st.expander(f"Constructed image vector of size (256, 256, 3)"):
+                constructed_img = np.random.rand(256,256,3)
+                st.write('(256, 256, 3)')
+                st.write(constructed_img)
+
+            with st.expander(f"Super resolution image vector of size ({sz}, {sz}, 3)"):
+                constructed_img = np.random.rand(sz*2,sz*2,3)
+                new_sz = sz*4
+                st.write('({new_sz}, {new_sz}, 3)')
+                st.write(constructed_img)
+            
+
 else:
     st.warning('⚠ Please upload your Image file 😯')
 

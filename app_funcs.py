@@ -13,7 +13,7 @@ def instantiate_model(model_name):
         else:
             model_path = 'models/RRDB_PSNR_x4.pth'
 
-        device = torch.device('cuda')
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model = arch.RRDBNet(3, 3, 64, 23, gc=32)
         model.load_state_dict(torch.load(model_path), strict=True)
         model.eval()
@@ -26,7 +26,7 @@ def instantiate_model(model_name):
 
 @st.cache(persist=True,allow_output_mutation=True,show_spinner=False,suppress_st_warning=True)
 def image_super_resolution(uploaded_image, downloaded_image, model):
-    device = torch.device('cuda')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     img = cv2.imread(uploaded_image, cv2.IMREAD_COLOR)
     img = img * 1.0 / 255
     img = torch.from_numpy(np.transpose(img[:, :, [2, 1, 0]], (2, 0, 1))).float()

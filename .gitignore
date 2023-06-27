@@ -1,1 +1,6 @@
 __pycache__
+*.jpg
+*.png
+*.jpeg
+images/
+models/SRGAN.pth

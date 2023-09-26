@@ -13,7 +13,6 @@ RUN pip install -r requirements.txt
 RUN apt-get update
 RUN echo "Make sure to have CUDA>11.0 for GPU support"
 RUN pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
-RUN pip install tensorflow==2.9
 
 ENV PORT 8501
 

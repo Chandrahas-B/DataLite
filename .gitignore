@@ -1,6 +1,5 @@
 __pycache__
-*.jpg
-*.png
-*.jpeg
+sender/
+receiver/
 images/
 models/SRGAN.pth

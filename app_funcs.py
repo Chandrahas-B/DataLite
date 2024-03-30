@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 import RRDBNet_arch as arch
 
-@st.cache(persist=True,allow_output_mutation=True,show_spinner=False,suppress_st_warning=True)
+# @st.cache_resource()
 def instantiate_model(model_name):
     if model_name:
         if model_name == "2048 architecture":
@@ -24,7 +24,7 @@ def instantiate_model(model_name):
         st.warning('⚠ Please choose a model !! 😯')
 
 
-@st.cache(persist=True,allow_output_mutation=True,show_spinner=False,suppress_st_warning=True)
+# @st.cache_resource()
 def image_super_resolution(uploaded_image, downloaded_image, model):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     img = cv2.imread(uploaded_image, cv2.IMREAD_COLOR)
@@ -42,7 +42,7 @@ def image_super_resolution(uploaded_image, downloaded_image, model):
     cv2.imwrite(downloaded_image, output)
 
 
-@st.cache(persist=True,allow_output_mutation=True,show_spinner=False,suppress_st_warning=True)
+# @st.cache_resource()
 def download_success():
     st.balloons()
     st.success('✅ Download Successful !!')
